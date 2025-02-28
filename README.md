@@ -39,7 +39,7 @@ For inference with LeScore, follow these steps:
    If you want to infer scores for multiple examples using the same prompt:
    
    ```python
-   score_dict_multi = infer_all_conditions_multi_example("<img1_obj_or_path>", "<prompt>", model, image_processor, tokenizer)
+   score_dict_multi = infer_all_conditions_multi_example(["<img1_obj_or_path>", "<img2_obj_or_path>", ...], "<prompt>", model, image_processor, tokenizer)
    ```
 
 ## Acknowledgments
