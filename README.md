@@ -42,6 +42,66 @@ For inference with LeScore, follow these steps:
    score_dict_multi = infer_all_conditions_multi_example(["<img1_obj_or_path>", "<img2_obj_or_path>", ...], "<prompt>", model, image_processor, tokenizer)
    ```
 
+
+## Installation for LePref Annotation
+
+First, create a virtual environment and install PyTorch:
+
+```bash
+conda create -n lepref python=3.10.16
+conda activate lepref
+pip install torch==2.5.1+cu124 torchaudio==2.5.1+cu124 torchvision==0.20.1+cu124 --index-url https://download.pytorch.org/whl/cu124
+```
+
+Then, install vllm:
+```bash
+pip install vllm
+```
+
+## LePref Annotation 
+
+For LePref Annotation , we adopt [Pixtral 12B](https://drive.google.com/file/d/1g3JnycSLlmKqIXGDjYYR5eoDxrowiGte/view?usp=drive_link), but you can choose any [vllm](https://docs.vllm.ai/en/latest/) supported MLLM models.
+
+Use `MLLM_model_sampling_loader` to load your model and configure sampling parameters. This function initializes the model with specific memory limits and token configurations.
+
+ ```python
+ from annoutils import MLLM_model_sampling_loader, generate_request
+ chat_func, sampling_params = MLLM_model_sampling_loader(
+     n=1,
+     temperature=0,
+     model_name="mistralai/Pixtral-12B-2409"
+ )
+ ```
+
+The `generate_request` function builds a list of messages based on the provided template type. Here is the template type and supported inputs and usage:
+
+ | Type  | Isage    | Supported Input Forms |
+ |:-:|:-:|:-:|
+ | prompt_processing   | Processes a text-to-image prompt by splitting it into four distinct parts: image content, magic words, artistic style, and visual properties.           | Text prompt    |
+ | prompt_NSFW_filtering   | Analyzes a text prompt to detect any NSFW (Not Safe For Work) content.       | Text prompt        |
+ | prompt_classification   | Classifies a text-to-image prompt into one of the following categories: Abstract & Artistic, Animals & Plants, Characters, Objects & Food, or Scenes          | Text prompt |
+ | captioning_coco_image	   | Generates a precise caption for an real image, focusing solely on the content.                  |Single image |
+ | captioning_aes_image   | Provides a concise description of an image’s content along with a brief evaluation of its artistic style and notable visual properties          |Single image  |
+ | annotation_alignment   | Evaluates how well each provided image aligns with a given text prompt.              | Text prompt and a list of images|
+ | annotation_aesthetic   | Evaluates the aesthetic quality of AI-generated images with a given text prompt.           | Text prompt and a list of images|
+ | annotation_fidelity  | Evaluates the aesthetic quality of AI-generated images with a given text prompt.           | Text prompt and a list of images|
+
+```python
+ messages = generate_request(
+     template_type="annotation_alignment",
+     prompt="A dog and a cat and me.",
+     image=["path/to/image1.jpg", "path/to/image2.jpg"]
+ )
+ ```
+
+Call the chat function with the generated messages and sampling parameters to obtain a response:
+
+ ```python
+ response = chat_func(messages, sampling_params)
+ print(response)
+ ```
+    
 ## Acknowledgments
 
 We thank the authors of [ImageReward](https://github.com/kekewind/ImageReward), [HPS](https://github.com/tgxs002/align_sd), [HPS v2](https://github.com/tgxs002/HPSv2), [PickScore](https://github.com/yuvalkirstain/PickScore), and [MPS](https://github.com/Kwai-Kolors/MPS) for their code and papers, which have greatly contributed to our work.
+
