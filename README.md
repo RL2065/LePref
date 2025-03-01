@@ -89,8 +89,8 @@ The `generate_request` function builds a list of messages based on the provided 
 ```python
  messages = generate_request(
      template_type="annotation_alignment",
-     prompt="A dog and a cat and me.",
-     image=["path/to/image1.jpg", "path/to/image2.jpg"]
+     prompt="<prompt>",
+     image=["<img1_obj_or_path>", "<img2_obj_or_path>", ...]
  )
  ```
 
