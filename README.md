@@ -41,7 +41,19 @@ For inference with LeScore, follow these steps:
    ```python
    score_dict_multi = infer_all_conditions_multi_example(["<img1_obj_or_path>", "<img2_obj_or_path>", ...], "<prompt>", model, image_processor, tokenizer)
    ```
-
+## Pairwise Accuracy of LeScore
+| Method                      | Multi-dimension   | Human Annotation   |    Pick-a-Pic v1|   HPD v2 |   ImageRewardDB | Mean   |
+|:----------------------------|:--------|:--------------|:----------------|---------:|----------------:|:-------|
+| CLIPScore        |         | ✔             |            0.608|    0.712 |           0.543 | 0.628  |
+| Aesthetic Score  |         | ✔             |            0.568|    0.726 |           0.574 | 0.623  |
+| HPS v1              |         | ✔             | 0.667|    0.731 |           0.612 | 0.67   |
+| HPS v2           |         | ✔             | 0.674|    0.833 |           0.657 | 0.721  |
+| PickScore       |         | ✔             | 0.705|    0.798 |           0.629 | 0.711  |
+| ImageReward    |         | ✔             | 0.611|    0.706 |           0.651 | 0.656  |
+| MPS                   | ✔       | ✔             | / |    0.835 |           0.675 | /      |
+| MPS_overall          |         | ✔             | 0.637|    0.838 |           0.663 | 0.713  |
+| VP-Score     |         |               | 0.671|    0.794 |           0.663 | 0.709  |
+| LeScore                     | ✔       |               | 0.674|    0.829 |           0.642 | 0.715  |
 
 ## Installation for LePref Annotation
 
