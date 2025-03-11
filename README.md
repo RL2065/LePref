@@ -23,9 +23,11 @@ pip install -r requirements.txt
 For inference with LeScore, follow these steps:
 
 1. Download the Checkpoint
+
    First, download the LeScore checkpoint from [this link](https://drive.google.com/file/d/1g3JnycSLlmKqIXGDjYYR5eoDxrowiGte/view?usp=drive_link), then move the checkpoint file to the `outputs` directory.
 
 2. Inference for a Single Image 
+
    To infer the score for a single image, use the following example code:
    
    ```python
@@ -36,6 +38,7 @@ For inference with LeScore, follow these steps:
    ```
    
 3. Inference for Multiple Examples  
+
    If you want to infer scores for multiple examples using the same prompt:
    
    ```python
