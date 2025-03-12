@@ -95,11 +95,11 @@ The `generate_request` function builds a list of messages based on the provided 
  | prompt_processing   | Processes a text-to-image prompt by splitting it into four distinct parts: image content, magic words, artistic style, and visual properties.           | Text prompt    |
  | prompt_NSFW_filtering   | Analyzes a text prompt to detect any NSFW (Not Safe For Work) content.       | Text prompt        |
  | prompt_classification   | Classifies a text-to-image prompt into one of the following categories: Abstract & Artistic, Animals & Plants, Characters, Objects & Food, or Scenes          | Text prompt |
- | captioning_coco_image	   | Generates a precise caption for an real image, focusing solely on the content.                  |Single image |
- | captioning_aes_image   | Provides a concise description of an image’s content along with a brief evaluation of its artistic style and notable visual properties          |Single image  |
- | annotation_alignment   | Evaluates how well each provided image aligns with a given text prompt.              | Text prompt and a list of images|
+ | captioning_coco_image	   | Generates a precise caption for an real image, focusing solely on the content. ( For COCO images)                 |Single image |
+ | captioning_aes_image   | Provides a concise description of an image’s content along with a brief evaluation of its artistic style and notable visual properties. (For LAION Aes 6.5+ images)         |Single image  |
+ | annotation_alignment   | Evaluates the alignment  quality of AI-generated images with a given text prompt.              | Text prompt and a list of images|
  | annotation_aesthetic   | Evaluates the aesthetic quality of AI-generated images with a given text prompt.           | Text prompt and a list of images|
- | annotation_fidelity  | Evaluates the aesthetic quality of AI-generated images with a given text prompt.           | Text prompt and a list of images|
+ | annotation_fidelity  | Evaluates the fidelity quality of AI-generated images with a given text prompt.           | Text prompt and a list of images|
 
 ```python
  messages = generate_request(
